@@ -1,0 +1,6 @@
+[[redirects]]
+  # Single Page Application (SPA) routing fix pannuvaitharku
+  # Page refresh panna 404 error varama irukka ithu romba mukkiyam
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -30,7 +30,7 @@ const Home = ({ isLoggedIn, setIsLoggedIn }) => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [images.length]);
 
   return (
     <section>
