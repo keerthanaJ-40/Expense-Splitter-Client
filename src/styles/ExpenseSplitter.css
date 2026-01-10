@@ -1,0 +1,210 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* PAGE BACKGROUND WITH IMAGE */
+.body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.45)
+    ),
+    url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 10px;
+}
+
+/* MAIN CARD */
+.container {
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 25px 22px 30px;
+  border-radius: 22px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  text-align: center;
+  animation: slideUp 0.5s ease;
+}
+
+/* TITLE */
+.container h2 {
+  margin-bottom: 6px;
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #5f7cff, #27ae60);
+  background-clip: text;
+-webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+/* SUB TITLE */
+.desc {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 18px;
+}
+
+/* INPUT */
+input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: 1.5px solid #ccc;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #5f7cff;
+  box-shadow: 0 0 0 3px rgba(95, 124, 255, 0.2);
+}
+
+/* SPLIT TYPE */
+.split-type {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+/* SECTION HEADERS */
+h4 {
+  margin: 18px 0 10px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+}
+
+/* TAG LISTS */
+.roommates,
+.expensetype {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* TAG STYLE */
+.mate,
+.type {
+  padding: 8px 16px;
+  border-radius: 25px;
+  border: 1.5px solid #aaa;
+  cursor: pointer;
+  font-size: 13px;
+  background: #f4f6ff;
+  transition: all 0.25s ease;
+}
+
+.mate:hover,
+.type:hover {
+  transform: translateY(-2px);
+}
+
+/* SELECTED TAG */
+.mate.selected,
+.type.selected {
+  background: linear-gradient(135deg, #5f7cff, #27ae60);
+  color: white;
+  border-color: transparent;
+}
+
+/* ADD BOX */
+.add-box {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.add-box input {
+  flex: 1;
+}
+
+.add-box button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #5f7cff, #27ae60);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.add-box button:hover {
+  padding: 10px;
+  background-color: #114c88;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* UNEQUAL INPUTS */
+.unequal-inputs {
+  margin-top: 12px;
+}
+
+.mate-selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.mate-selected span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* CALCULATE BUTTON */
+.calc-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 18px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #4caf50, #2ecc71);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.calc-btn:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(76, 175, 80, 0.4);
+}
+
+/* RESULT */
+.result {
+  margin-top: 18px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.result h4 {
+  margin-bottom: 6px;
+}
+
+/* ANIMATION */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
