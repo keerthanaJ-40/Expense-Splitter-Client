@@ -11,7 +11,7 @@ const Login = ({ onClose, onLoginSuccess, onCreateAccount }) => {
     confirmPassword: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.email || !formData.email.includes("@")) {
@@ -28,11 +28,37 @@ const Login = ({ onClose, onLoginSuccess, onCreateAccount }) => {
       alert("Passwords do not match");
       return;
     }
+     console.log("Connecting to:", process.env.REACT_APP_API_URL); 
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json",
+          "Accept":"application/json"
+         },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
 
-    alert("Login Successful 🎉");
-    onLoginSuccess();
-    onClose();
-    navigate("/add-expense");
+      if (!response.ok) {
+        const errorData = await response.json();
+        alert(errorData.message || "Login failed");
+        return;
+
+      }
+       const data = await response.json();
+      console.log("Backend Success Data:", data);
+
+      alert("Login Successful 🎉");
+      onLoginSuccess();
+      onClose();
+      navigate("/add-expense");
+    }
+    catch(error){
+      console.error("Login Error:",error);
+      alert("Server Not Connected");
+    }
   };
 
   return (

@@ -9,24 +9,50 @@ const Signin = ({ onClose, onLoginSuccess }) => {
         confirmPassword: "",
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.email.length === 0 && !formData.email.endsWith("@example.com")) {
+        console.log("Submit clicked", formData);
+        if (!formData.email || !formData.email.endsWith("@gmail.com")) {
             alert("Must fill the E-mail and must end with @gmail.com");
+            return;
         }
-        else if (formData.password.length < 6) {
+        if (formData.password.length < 6) {
             alert("password must contain 6 charecters");
+            return;
         }
-        else if (formData.confirmPassword.length < 6) {
+        if (formData.password  !== formData.confirmPassword) {
             alert("Confirm password must same the password");
+            return;
         }
-        else {
-            alert("Sign In Successfull");
-            onLoginSuccess();
-            onClose();
+        try {
+            const apiUrl = process.env.REACT_APP_API_URL;
+            console.log("Registering at:", `${apiUrl}/api/auth/signin`);
+            const response = await fetch(`${apiUrl}/api/auth/signin`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email: formData.email,
+                password: formData.password,
+            }),
+        });
+            const data = await response.json();
+            if (response.ok) {
+                alert("Sign In Successful! Please login.");
+                onClose();
+            } else {
+                alert(data.message || "Registration failed");
+            }
+        } catch (error) {
+            console.error("Signin Error:", error);
         }
-        console.log("Form submitted:", formData);
-    }
+    };
+
+    /* else {alert("Sign In Successfull");
+    onLoginSuccess();
+    onClose();
+}
+console.log("Form submitted:", formData);
+    }*/
 
     return (
         <section className='modal-overlay'>
@@ -83,7 +109,7 @@ const Signin = ({ onClose, onLoginSuccess }) => {
                         />
 
                         <div className='btn1'>
-                            <button className='pulse-btn'>Sign In</button>
+                            <button type='submit' className='pulse-btn'>Sign In</button>
                         </div>
 
                     </div>
@@ -93,4 +119,4 @@ const Signin = ({ onClose, onLoginSuccess }) => {
     )
 }
 
-export default Signin
+export default Signin;

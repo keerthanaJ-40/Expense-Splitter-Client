@@ -14,6 +14,7 @@ const Home = ({ isLoggedIn, setIsLoggedIn }) => {
     setShowSignin(false);
     setShowLogin(false);
   };
+  
 
   // 🔥 SLIDER IMAGES
   const images = [
@@ -28,6 +29,20 @@ const Home = ({ isLoggedIn, setIsLoggedIn }) => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
     }, 3000);
+
+      // 🔥 BACKEND CONNECT LOGIC
+  const fetchData = async () => {
+    try {
+      const apiUrl = process.env.REACT_APP_API_URL; 
+      const response = await fetch(`${apiUrl}/api/auth`); 
+      const data = await response.json();
+      console.log("Backend message:", data.message);
+    } catch (error) {
+      console.error("Backend connect aagala!", error);
+    }
+  };
+
+  fetchData();
 
     return () => clearInterval(interval);
   }, [images.length]);

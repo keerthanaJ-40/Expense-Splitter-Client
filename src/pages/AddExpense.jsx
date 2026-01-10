@@ -77,7 +77,29 @@ const ExpenseSplit = () => {
     }
 
     setSplit(result);
+    saveExpense(result); 
   };
+  const saveExpense = async (result) => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/expenses`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: selectedExpenseType,
+          totalAmount: amount,
+          splitDetails: result,
+          date: new Date()
+        }),
+      });
+
+      if (response.ok) {
+        alert("Expense saved to Cloud! ✅");
+      }
+    } catch (error) {
+      console.log("Save error:", error);
+    }
+  };
+
 
   return (
     <div className="body">
@@ -172,9 +194,8 @@ const ExpenseSplit = () => {
           {expensetype.map((type, i) => (
             <div
               key={i}
-              className={`type ${
-                selectedExpenseType === type ? "selected" : ""
-              }`}
+              className={`type ${selectedExpenseType === type ? "selected" : ""
+                }`}
               onClick={() => setSelectedExpenseType(type)}
             >
               {type}
