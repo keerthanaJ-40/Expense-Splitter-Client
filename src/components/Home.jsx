@@ -30,8 +30,10 @@ const Home = ({ isLoggedIn, setIsLoggedIn }) => {
       setIndex((prev) => (prev + 1) % images.length);
     }, 3000);
 
+    
+
       // 🔥 BACKEND CONNECT LOGIC
-  const fetchData = async () => {
+  /*const fetchData = async () => {
     try {
       const apiUrl = process.env.REACT_APP_API_URL; 
       const response = await fetch(`${apiUrl}/api/auth`); 
@@ -42,7 +44,7 @@ const Home = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   };
 
-  fetchData();
+  fetchData(); */
 
     return () => clearInterval(interval);
   }, [images.length]);
