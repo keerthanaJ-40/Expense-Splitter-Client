@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "../styles/signin.css";
 
-const Signin = ({ onClose, onLoginSuccess }) => {
+const Signin = ({ onClose }) => {
 
     const [formData, setFormData] = useState({
         email: "",
@@ -29,7 +29,9 @@ const Signin = ({ onClose, onLoginSuccess }) => {
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/signin`,
                 {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                    headers: { "Content-Type": "application/json", 
+
+                    },
                     body: JSON.stringify({
                         email: formData.email,
                         password: formData.password,
@@ -45,6 +47,7 @@ const Signin = ({ onClose, onLoginSuccess }) => {
             }
         } catch (error) {
             console.error("Signin Error:", error);
+            alert("Unable to connect to server. Please try again.");
         }
     };
 
