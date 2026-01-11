@@ -20,21 +20,22 @@ const Signin = ({ onClose, onLoginSuccess }) => {
             alert("password must contain 6 charecters");
             return;
         }
-        if (formData.password  !== formData.confirmPassword) {
+        if (formData.password !== formData.confirmPassword) {
             alert("Confirm password must same the password");
             return;
         }
         try {
-            const apiUrl = process.env.REACT_APP_API_URL;
-            console.log("Registering at:", `${apiUrl}/api/auth/signin`);
-            const response = await fetch(`${apiUrl}/api/auth/signin`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                email: formData.email,
-                password: formData.password,
-            }),
-        });
+
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/signin`,
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        email: formData.email,
+                        password: formData.password,
+                        confirmPassword: formData.confirmPassword,
+                    }),
+                });
             const data = await response.json();
             if (response.ok) {
                 alert("Sign In Successful! Please login.");

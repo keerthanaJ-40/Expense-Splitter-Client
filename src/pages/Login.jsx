@@ -40,6 +40,7 @@ const Login = ({ onClose, onLoginSuccess, onCreateAccount }) => {
           password: formData.password,
         }),
       });
+      const data = await response.json();
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -47,8 +48,9 @@ const Login = ({ onClose, onLoginSuccess, onCreateAccount }) => {
         return;
 
       }
-       const data = await response.json();
-      console.log("Backend Success Data:", data);
+      localStorage.setItem("token",data.token);
+       
+
 
       alert("Login Successful 🎉");
       onLoginSuccess();

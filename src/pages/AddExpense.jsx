@@ -81,14 +81,14 @@ const ExpenseSplit = () => {
   };
   const saveExpense = async (result) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/expenses`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/expense/addExpense`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          type: selectedExpenseType,
-          totalAmount: amount,
-          splitDetails: result,
-          date: new Date()
+          title: selectedExpenseType,
+          amount: amount,
+          category: selectedExpenseType,
+          
         }),
       });
 

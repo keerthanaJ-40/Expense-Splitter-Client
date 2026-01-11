@@ -38,7 +38,7 @@ const Home = ({ isLoggedIn, setIsLoggedIn }) => {
       const data = await response.json();
       console.log("Backend message:", data.message);
     } catch (error) {
-      console.error("Backend connect aagala!", error);
+      console.error("Backend not connect!", error);
     }
   };
 
