@@ -81,7 +81,7 @@ const ExpenseSplit = () => {
   };
   const saveExpense = async (result) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/expense/addExpense`, {
+      const response = await fetch(`${process.env.BASE_URL}/api/expense/addExpense`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
