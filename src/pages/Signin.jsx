@@ -11,7 +11,7 @@ const Signin = ({ onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Submit clicked", formData);
+
         if (!formData.email || !formData.email.endsWith("@gmail.com")) {
             alert("Must fill the E-mail and must end with @gmail.com");
             return;
@@ -26,10 +26,10 @@ const Signin = ({ onClose }) => {
         }
         try {
 
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/signin`,
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/signup`,
                 {
                     method: "POST",
-                    headers: { "Content-Type": "application/json", 
+                    headers: { "Content-Type": "application/json"
 
                     },
                     body: JSON.stringify({
@@ -85,6 +85,7 @@ console.log("Form submitted:", formData);
                         <label>E-mail</label><br />
                         <input
                             type="email"
+                            id="email"
                             placeholder='Enter your email'
                             value={formData.email}
                             onChange={(e) => {
@@ -95,6 +96,7 @@ console.log("Form submitted:", formData);
                         <label>Password</label><br />
                         <input
                             type="password"
+                            id="password"
                             placeholder='Enter your password'
                             value={formData.password}
                             onChange={(e) => {

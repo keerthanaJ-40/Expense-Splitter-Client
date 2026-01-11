@@ -8,7 +8,6 @@ const Login = ({ onClose, onLoginSuccess, onCreateAccount }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
   });
 
   const handleSubmit = async (e) => {
@@ -28,13 +27,14 @@ const Login = ({ onClose, onLoginSuccess, onCreateAccount }) => {
       alert("Passwords do not match");
       return;
     }
-     console.log("Connecting to:", process.env.REACT_APP_API_URL); 
+    console.log("Connecting to:", process.env.REACT_APP_API_URL);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json",
-          "Accept":"application/json"
-         },
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
         body: JSON.stringify({
           email: formData.email,
           password: formData.password,
@@ -42,23 +42,25 @@ const Login = ({ onClose, onLoginSuccess, onCreateAccount }) => {
       });
       const data = await response.json();
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        alert(errorData.message || "Login failed");
-        return;
-
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.userId);
+        alert("Login Successful 🎉");
+        onLoginSuccess();
+        onClose();
+        navigate("/add-expense");
       }
-      localStorage.setItem("token",data.token);
-       
+      else{
+        alert(data.message)
+      }
 
 
-      alert("Login Successful 🎉");
-      onLoginSuccess();
-      onClose();
-      navigate("/add-expense");
+
+
+
     }
-    catch(error){
-      console.error("Login Error:",error);
+    catch (error) {
+      console.error("Login Error:", error);
       alert("Server Not Connected");
     }
   };
